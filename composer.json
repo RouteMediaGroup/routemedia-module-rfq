@@ -1,0 +1,21 @@
+{
+    "name": "routemedia/rfq",
+    "description": "Request for quote",
+    "require": {
+        "php": "~7.0.0|7.0.2|7.0.4|~7.0.6|~7.1.0|~7.2.0|~7.3.0|~7.4.0|~8.0.0|~8.1.0|~8.2.0|~8.3.0",
+        "magento/framework": "100.1.*"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "MIT"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "RouteMedia\\Rfq\\": ""
+        }
+    }
+}
