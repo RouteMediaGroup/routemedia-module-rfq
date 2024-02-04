@@ -12,43 +12,46 @@ class UpgradeSchema implements UpgradeSchemaInterface
     {
 
         if (version_compare($context->getVersion(), '1.0.2', '<')) {
-            // Füge das neue Feld hinzu
+            $installer = $setup;
+            $installer->startSetup();
+            /**
+             * update column 'overview'
+            **/
             $table = $installer->getTable('routemedia_rfq');
-
-            $installer->getConnection()->addColumn(
+            $installer->getConnection()->modifyColumn(
                 $table,
                 'requestData',
                 [
-                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                    'length' => '64k',
-                    'nullable' => true,
-                    'comment' => 'Request Data',
+                        'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                        'length' => '64k',
+                        'nullable' => true,
+                        'default' => null,
+                        'comment' => 'Request Data'
                 ]
             );
+            $installer->endSetup();
         }
 
         else if (version_compare($context->getVersion(), '1.0.1', '<')) {
             $installer = $setup;
             $installer->startSetup();
-                    /**
-                     * update column 'overview'
-                    **/
+            /**
+             * update column 'overview'
+            **/
 
-                    $table = $installer->getTable('routemedia_rfq');
+            $table = $installer->getTable('routemedia_rfq');
 
-                    $installer->getConnection()->modifyColumn(
-                        $table,
-                        'overview',
-                        [
-                                'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                                'length' => '64k',
-                                'nullable' => true,
-                                'default' => null,
-                                'comment' => 'Overview'
-                        ]
-                    );
-
-
+            $installer->getConnection()->modifyColumn(
+                $table,
+                'overview',
+                [
+                        'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                        'length' => '64k',
+                        'nullable' => true,
+                        'default' => null,
+                        'comment' => 'Overview'
+                ]
+            );
             $installer->endSetup();
         }
     }
