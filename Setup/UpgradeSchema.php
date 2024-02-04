@@ -10,21 +10,27 @@ class UpgradeSchema implements UpgradeSchemaInterface
 {
     public function upgrade(SchemaSetupInterface $setup, ModuleContextInterface $context)
     {
-
         if (version_compare($context->getVersion(), '1.0.2', '<')) {
-            // Füge das neue Feld hinzu
+            $installer = $setup;
+            $installer->startSetup();
+            /**
+             * update column 'overview'
+            **/
+
             $table = $installer->getTable('routemedia_rfq');
 
-            $installer->getConnection()->addColumn(
+            $installer->getConnection()->modifyColumn(
                 $table,
                 'requestData',
                 [
-                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                    'length' => '64k',
-                    'nullable' => true,
-                    'comment' => 'Request Data',
+                        'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                        'length' => '64k',
+                        'nullable' => true,
+                        'default' => null,
+                        'comment' => 'Request Data'
                 ]
             );
+            $installer->endSetup();
         }
 
         else if (version_compare($context->getVersion(), '1.0.1', '<')) {
