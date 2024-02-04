@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+
+        <!--<update id="RouteMedia_Extensions::routemediaextensions" title="RouteMedia Extensions" module="RouteMedia_Rfq" sortOrder="300" resource="RouteMedia_Extensions::routemediaextensions"/>-->
+        <add id="RouteMedia_Purchase::kundenanfrage"
+            title="Übersicht Kundenanfrage"
+            translate="title"
+            module="RouteMedia_Rfq"
+            sortOrder="10"
+            parent="RouteMedia_Purchase::einkauf"
+            action="rfq/index"
+            resource="RouteMedia_Rfq::rfq" />
+
+    </menu>
+</config>
