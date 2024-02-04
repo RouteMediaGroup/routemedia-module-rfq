@@ -12,24 +12,19 @@ class UpgradeSchema implements UpgradeSchemaInterface
     {
 
         if (version_compare($context->getVersion(), '1.0.2', '<')) {
-            $installer = $setup;
-            $installer->startSetup();
-            /**
-             * update column 'overview'
-            **/
+            // Füge das neue Feld hinzu
             $table = $installer->getTable('routemedia_rfq');
-            $installer->getConnection()->modifyColumn(
+
+            $installer->getConnection()->addColumn(
                 $table,
                 'requestData',
                 [
-                        'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-                        'length' => '64k',
-                        'nullable' => true,
-                        'default' => null,
-                        'comment' => 'Request Data'
+                    'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                    'length' => '64k',
+                    'nullable' => true,
+                    'comment' => 'Request Data',
                 ]
             );
-            $installer->endSetup();
         }
 
         else if (version_compare($context->getVersion(), '1.0.1', '<')) {
@@ -38,7 +33,6 @@ class UpgradeSchema implements UpgradeSchemaInterface
             /**
              * update column 'overview'
             **/
-
             $table = $installer->getTable('routemedia_rfq');
 
             $installer->getConnection()->modifyColumn(
